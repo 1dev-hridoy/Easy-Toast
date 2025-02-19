@@ -25,8 +25,8 @@ class Toast {
       this.setPosition()
       this.animateIn()
       this.bindEvents()
-      if (this.options.progress) this.startProgressBar()
-      if (this.options.duration) this.autoClose()
+      if (this.options.progress && this.options.duration !== false) this.startProgressBar()
+      if (this.options.duration !== false) this.autoClose()
     }
   
     createToastElement() {
@@ -50,14 +50,15 @@ class Toast {
               </div>
           `
       const closeButton = this.options.closable ? '<span class="toast-close">&times;</span>' : ""
-      const progressBar = this.options.progress
-        ? '<div class="toast-progress"><div class="toast-progress-bar"></div></div>'
-        : ""
+      const progressBar =
+        this.options.progress && this.options.duration !== false
+          ? '<div class="toast-progress"><div class="toast-progress-bar"></div></div>'
+          : ""
   
       this.toast.innerHTML = `${icon}${content}${closeButton}${progressBar}`
       document.getElementById("toastContainer").appendChild(this.toast)
   
-      if (this.options.progress) {
+      if (this.options.progress && this.options.duration !== false) {
         this.progressBar = this.toast.querySelector(".toast-progress-bar")
       }
     }
@@ -160,57 +161,53 @@ class Toast {
     return toast
   }
   
-  document.getElementById("showDefaultToast").addEventListener("click", () => {
-    showToast({ message: "This is a default toast message!" })
-  })
+  function getOptionsFromDataAttributes(element) {
+    const options = {}
+    for (const key in element.dataset) {
+      if (key === "duration") {
+        options[key] = element.dataset[key] === "false" ? false : Number.parseInt(element.dataset[key])
+      } else if (key === "actionText") {
+        options.action = {
+          text: element.dataset[key],
+          callback: () => alert("Action clicked!"),
+        }
+      } else {
+        options[key] = element.dataset[key]
+      }
+    }
+    return options
+  }
   
-  document.getElementById("showSuccessToast").addEventListener("click", () => {
-    showToast({
-      type: "success",
-      title: "Success!",
-      message: "Your action was completed successfully.",
-      duration: 5000,
+  // Initialize toasts from HTML elements
+  document.querySelectorAll('button[id^="show"]').forEach((button) => {
+    button.addEventListener("click", () => {
+      let options = getOptionsFromDataAttributes(button)
+  
+      // Special case for custom toast
+      if (button.id === "showCustomToast") {
+        options = {
+          ...options,
+          duration: false,
+          action: {
+            text: options.actionText || "Click me!",
+            callback: () => {
+              alert("Custom action clicked!")
+              // You can perform any action here
+            },
+          },
+        }
+      }
+  
+      // Special case for default toast
+      if (button.id === "showDefaultToast" && !options.message) {
+        options.message = "This is a default toast message!"
+      }
+  
+      showToast(options)
     })
   })
   
-  document.getElementById("showErrorToast").addEventListener("click", () => {
-    showToast({
-      type: "error",
-      title: "Error",
-      message: "An error occurred. Please try again.",
-      duration: 5000,
-    })
-  })
-  
-  document.getElementById("showInfoToast").addEventListener("click", () => {
-    showToast({
-      type: "info",
-      title: "Did you know?",
-      message: "You can drag these toast notifications!",
-      duration: 5000,
-    })
-  })
-  
-  document.getElementById("showWarningToast").addEventListener("click", () => {
-    showToast({
-      type: "warning",
-      title: "Warning",
-      message: "This action cannot be undone.",
-      duration: 5000,
-    })
-  })
-  
-  document.getElementById("showCustomToast").addEventListener("click", () => {
-    const toast = showToast({
-      type: "info",
-      title: "Custom Toast",
-      message: "This toast has a custom action and can shake!",
-      duration: false,
-      action: {
-        text: "Shake me!",
-        callback: () => toast.shake(),
-      },
-    })
-  })
+  // Create a global function to show toasts from anywhere in your application
+  window.showToast = showToast
   
   
