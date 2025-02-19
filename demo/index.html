@@ -3,23 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Creative Toast Notifications</title>
+    <title>Dynamic Toast Notifications</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="/src/easy-toast.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/1dev-hridoy/easy-toast/src/easy-toast.min.css">
 </head>
+ <style>
+    
+  body {
+    font-family: "Arial", sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #4caf50;
+    color: white;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  }
+  
+  button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+ </style>
 <body>
     <div class="controls">
         <button id="showDefaultToast">Default Toast</button>
-        <button id="showSuccessToast">Success Toast</button>
-        <button id="showErrorToast">Error Toast</button>
-        <button id="showInfoToast">Info Toast</button>
-        <button id="showWarningToast">Warning Toast</button>
-        <button id="showCustomToast">Custom Toast</button>
+        <button id="showSuccessToast" 
+            data-type="success" 
+            data-title="Success!" 
+            data-message="Your action was completed successfully." 
+            data-duration="5000">
+            Success Toast
+        </button>
+        <button id="showErrorToast" 
+            data-type="error" 
+            data-title="Error" 
+            data-message="An error occurred. Please try again." 
+            data-duration="5000">
+            Error Toast
+        </button>
+        <button id="showInfoToast" 
+            data-type="info" 
+            data-title="Did you know?" 
+            data-message="You can drag these toast notifications!" 
+            data-duration="5000">
+            Info Toast
+        </button>
+        <button id="showWarningToast" 
+            data-type="warning" 
+            data-title="Warning" 
+            data-message="This action cannot be undone." 
+            data-duration="5000">
+            Warning Toast
+        </button>
+        <button id="showCustomToast" 
+            data-type="info" 
+            data-title="Custom Toast" 
+            data-message="This toast has a custom action!" 
+            data-duration="false" 
+            data-action-text="Click me!">
+            Custom Toast
+        </button>
     </div>
 
     <div id="toastContainer"></div>
 
-    <script src="/src/easy-toast.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/1dev-hridoy/easy-toast/src/easy-toast.js"></script>
 </body>
 </html>
 

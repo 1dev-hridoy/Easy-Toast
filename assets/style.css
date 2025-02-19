@@ -1,0 +1,239 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
+
+:root {
+    --gradient-primary: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+    --color-dark: #0a0a0a;
+    --color-light: #ffffff;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    overflow-x: hidden;
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 1200px) {
+    html {
+        font-size: 18px;
+    }
+}
+
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    padding: 2rem 1rem;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 90%;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+    .hero h1 {
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .hero h1 {
+        font-size: 5rem;
+    }
+}
+
+.navbar {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    backdrop-filter: blur(10px);
+    padding: 1rem;
+}
+
+.feature-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 15px;
+    padding: 1.5rem;
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.code-block {
+    background: rgba(0, 0, 0, 0.6);
+    padding: 1rem;
+    border-radius: 10px;
+    margin: 1rem 0;
+    overflow-x: auto;
+    font-size: 0.9rem;
+}
+
+@media (max-width: 767px) {
+    .code-block {
+        font-size: 0.8rem;
+    }
+}
+
+.toast-animation {
+    position: absolute;
+    width: 250px;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 8px;
+    padding: 1rem;
+    opacity: 0;
+    animation: float 15s infinite;
+    display: none;
+}
+
+@media (min-width: 768px) {
+    .toast-animation {
+        display: block;
+        width: 300px;
+    }
+}
+
+.toast-animation:nth-child(1) { top: 10%; left: 5%; animation-delay: 0s; }
+.toast-animation:nth-child(2) { top: 20%; right: 5%; animation-delay: 3s; }
+.toast-animation:nth-child(3) { bottom: 15%; left: 10%; animation-delay: 6s; }
+.toast-animation:nth-child(4) { bottom: 25%; right: 10%; animation-delay: 9s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    25% { opacity: 0.7; }
+    50% { transform: translateY(-50px) rotate(5deg); opacity: 1; }
+    75% { opacity: 0.7; }
+}
+
+.cta-button {
+    background: var(--gradient-primary);
+    border: none;
+    color: white;
+    padding: 0.8rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: inline-block;
+    text-decoration: none;
+}
+
+@media (min-width: 768px) {
+    .cta-button {
+        padding: 1rem 2.5rem;
+        font-size: 1.2rem;
+    }
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+.toast-demo-btn {
+    margin: 0.5rem;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+    font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+    .toast-demo-btn {
+        font-size: 1rem;
+    }
+}
+
+.toast-demo-btn:hover {
+    transform: scale(1.05);
+}
+
+section {
+    padding: 3rem 0;
+}
+
+@media (min-width: 768px) {
+    section {
+        padding: 5rem 0;
+    }
+}
+
+.container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+}
+
+@media (min-width: 768px) {
+    .container {
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
+}
+
+#documentation .row {
+    --bs-gutter-x: 2rem;
+    --bs-gutter-y: 2rem;
+}
+
+#examples .d-flex {
+    gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+    #examples .d-flex {
+        gap: 1rem;
+    }
+}
+
+footer {
+    padding: 2rem 0;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+html {
+    scroll-behavior: smooth;
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        background-color: rgba(0, 0, 0, 0.9);
+        padding: 1rem;
+        border-radius: 10px;
+        margin-top: 1rem;
+    }
+}
