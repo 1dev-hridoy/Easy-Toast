@@ -72,7 +72,7 @@ class Toast {
           warning: "fa-exclamation-triangle",
         }[this.options.type] || "fa-bell"
   
-      return `<i class="toast-icon fas ${iconClass}"></i>`
+      return `<div class="toast-icon"><i class="fas ${iconClass}"></i></div>`
     }
   
     setPosition() {
